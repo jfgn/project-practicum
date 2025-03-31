@@ -34,7 +34,7 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     "polls.apps.PollsConfig",
-    "chocolate.apps.ChocolateConfig",
+    "cars.apps.CarsConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

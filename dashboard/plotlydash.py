@@ -10,8 +10,8 @@ import plotly.express as px
 app = Dash()
 
 # Используем имя сервиса из docker-compose
-API_URL = 'http://django:8000/api/chocolate/'
-# API_URL = 'http://127.0.0.1:8000/api/chocolate/'
+API_URL = 'http://django:8000/api/cars/'
+# API_URL = 'http://127.0.0.1:8000/api/cars/'
 
 def fetch_hardware_data():
     try:
@@ -21,7 +21,6 @@ def fetch_hardware_data():
         
         df = pd.read_csv(StringIO(response.text))
         # Преобразуем дату в datetime для лучшей сортировки
-        df['date'] = pd.to_datetime(df['date'])
         print(f"Успешно загружено {len(df)} записей")
         return df
         
@@ -34,11 +33,11 @@ df = fetch_hardware_data()
 
 # App layout
 app.layout = [
-    html.Div(children='Продажи шоколада'),
+    html.Div(children='Продажи автомобилей'),
     dcc.Dropdown(
         id='graph-dropdown',
         options=[{'label': column, 'value': column} for column in df.columns],
-        value='country',  # Значение по умолчанию
+        value='model',  # Значение по умолчанию
         placeholder="Выберите характеристику"
     ),
     dcc.Graph(

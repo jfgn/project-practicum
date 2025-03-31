@@ -1,10 +1,10 @@
 from rest_framework.generics import ListAPIView
 from rest_framework.renderers import JSONRenderer
-from chocolate.models import Sales
-from chocolate.serializers import ChocolateSerializer
+from cars.models import Car
+from cars.serializers import CarsSerializer
 from .renderers import CSVRenderer  # Импортируем CSV-рендерер
 
-class SalesListView(ListAPIView):
-    queryset = Sales.objects.all()
-    serializer_class = ChocolateSerializer
+class CarListView(ListAPIView):
+    queryset = Car.objects.all()
+    serializer_class = CarsSerializer
     renderer_classes = [JSONRenderer, CSVRenderer]  # Добавляем поддержку CSV

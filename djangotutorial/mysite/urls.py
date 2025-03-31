@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from django.urls import path
 from polls.views import QuestionListView, VoteView
-from chocolate.views import SalesListView
+from cars.views import CarListView
 
 
 # API Root View (Отображает все маршруты в /)
@@ -16,7 +16,7 @@ class APIRootView(APIView):
         return Response({
             "questions": reverse("question-list", request=request, format=format),
             "vote": request.build_absolute_uri("/api/questions/vote/{choice_id}/"),
-            "chocolate": reverse("chocolate", request=request, format=format),
+            "cars": reverse("cars", request=request, format=format),
             "admin": "/admin/"
         })
 
@@ -28,7 +28,7 @@ urlpatterns = [
     path("polls/", include("polls.urls")),
     path("admin/", admin.site.urls),
     # path('api-auth/', include('rest_framework.urls')),
-    # JSON: http://127.0.0.1:8000/api/chocolate/
-    # CSV: http://127.0.0.1:8000/api/chocolate/?format=csv
-    path('api/chocolate/', SalesListView.as_view(), name='chocolate')
+    # JSON: http://127.0.0.1:8000/api/cars/
+    # CSV: http://127.0.0.1:8000/api/cars/?format=csv
+    path('api/cars/', CarListView.as_view(), name='cars')
 ]
