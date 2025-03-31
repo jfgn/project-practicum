@@ -1,0 +1,31 @@
+version: '3'
+services:
+  django:
+    build: ./djangotutorial
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./djangotutorial:/app
+    ports:
+      - "8000:8000"
+    networks:
+      - app-net
+
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: dockerfile
+    ports:
+      - "8050:8050"
+    environment:
+      DJANGO_API_URL: "http://django:8000/api/chocolate/"
+    depends_on:
+      - django
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    driver: bridge
+
+volumes:
+  postgres_data:
