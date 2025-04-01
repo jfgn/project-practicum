@@ -9,4 +9,4 @@ class WebsiteUser(HttpUser):
 
     @task
     def load_users(self):
-        self.client.get("/users/") 
+        self.client.get("/api/cars/") 
